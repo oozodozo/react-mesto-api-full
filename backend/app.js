@@ -35,7 +35,7 @@ app.get('/signout', logout);
 app.use('/users', auth, usersRoutes);
 app.use('/cards', auth, cardsRoutes);
 
-app.use('*', auth, () => {
+app.use('*', () => {
   throw new NotFound('Запрашиваемая страница не найдена');
 });
 
