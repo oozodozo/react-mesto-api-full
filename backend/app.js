@@ -21,8 +21,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
-app.use(cookieParser());
 app.use(cors);
+app.use(cookieParser());
 app.use(requestLogger);
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -34,11 +34,11 @@ app.post('/signup', validatorUser, createUser);
 app.get('/signout', logout);
 app.use('/users', auth, usersRoutes);
 app.use('/cards', auth, cardsRoutes);
-/*
+
 app.use('*', auth, () => {
   throw new NotFound('Запрашиваемая страница не найдена');
 });
-*/
+
 mongoose.connect('mongodb://localhost:27017/mestodb', { useNewUrlParser: true, family: 4 });
 
 app.use(errorLogger);
