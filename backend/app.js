@@ -24,6 +24,11 @@ app.use(helmet());
 app.use(cookieParser());
 app.use(allowCors);
 app.use(requestLogger);
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадет');
+  }, 0);
+});
 app.post('/signin', validatorLogin, login);
 app.post('/signup', validatorUser, createUser);
 app.use('/users', auth, usersRoutes);
