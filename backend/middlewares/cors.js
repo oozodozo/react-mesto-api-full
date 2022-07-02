@@ -1,6 +1,6 @@
 const allowedCors = [
-  'http://dozo.nomoredomains.xyz',
   'https://dozo.nomoredomains.xyz',
+  'http://dozo.nomoredomains.xyz',
   'http://localhost:3000',
   'https://localhost:3000',
 ];
