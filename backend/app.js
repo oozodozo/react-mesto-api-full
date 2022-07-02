@@ -13,43 +13,16 @@ const auth = require('./middlewares/auth');
 const { validatorLogin, validatorUser } = require('./middlewares/joiValidate');
 const handleErrors = require('./middlewares/handleErrors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-//const cors = require('./middlewares/cors');
+const cors = require('./middlewares/cors');
 
 const { PORT = 3000 } = process.env;
 const app = express();
-
-const allowedCors = [
-  'https://dozo.nomoredomains.xyz',
-  'http://dozo.nomoredomains.xyz',
-  'http://localhost:3000',
-  'https://localhost:3000',
-];
-
-const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,POST,PUT,PATCH,DELETE';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(cookieParser());
-app.use((req, res, next) => {
-  const { method } = req;
-  const { origin } = req.headers;
-  const requestHeaders = req.headers['access-control-request-headers'];
-
-  res.header('Access-Control-Allow-Credentials', true);
-  res.header('Access-Control-Allow-Origin', '*');
-  /*
-    if (allowedCors.includes(origin)) {
-      res.header('Access-Control-Allow-Origin', origin);
-    }
-  */
-  if (method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
-    res.header('Access-Control-Allow-Headers', requestHeaders);
-    res.end();
-  }
-  next();
-});
+app.use(cors);
 app.use(requestLogger);
 app.get('/crash-test', () => {
   setTimeout(() => {
