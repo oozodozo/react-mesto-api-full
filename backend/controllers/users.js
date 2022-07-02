@@ -1,3 +1,4 @@
+const { NODE_ENV, JWT_SECRET } = process.env;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
@@ -91,7 +92,7 @@ const login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        'secret-key',
+        NODE_ENV === 'production' ? JWT_SECRET : 'secret-key',
         { expiresIn: '7d' },
       );
       res.cookie('jwt', token, {
@@ -114,6 +115,17 @@ const getCurrentUser = (req, res, next) => {
     .catch(next);
 };
 
+const logout = (reg, res) => {
+  res.clearCookie('jwt').send({ message: 'Выход' });
+};
+
 module.exports = {
-  getUsers, getUserById, createUser, updateUserInfo, updateUserAvatar, login, getCurrentUser,
+  getUsers,
+  getUserById,
+  createUser,
+  updateUserInfo,
+  updateUserAvatar,
+  login,
+  getCurrentUser,
+  logout,
 };
