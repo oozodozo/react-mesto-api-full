@@ -34,10 +34,11 @@ app.post('/signup', validatorUser, createUser);
 app.get('/signout', logout);
 app.use('/users', auth, usersRoutes);
 app.use('/cards', auth, cardsRoutes);
+/*
 app.use('*', auth, () => {
   throw new NotFound('Запрашиваемая страница не найдена');
 });
-
+*/
 mongoose.connect('mongodb://localhost:27017/mestodb', { useNewUrlParser: true, family: 4 });
 
 app.use(errorLogger);
