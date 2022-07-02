@@ -9,11 +9,11 @@ const usersRoutes = require('./routes/users');
 const cardsRoutes = require('./routes/cards');
 const NotFound = require('./errors/NotFoundError');
 const { login, createUser, logout } = require('./controllers/users');
+const cors = require('./middlewares/cors');
 const auth = require('./middlewares/auth');
 const { validatorLogin, validatorUser } = require('./middlewares/joiValidate');
 const handleErrors = require('./middlewares/handleErrors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const cors = require('./middlewares/cors');
 
 const { PORT = 3000 } = process.env;
 const app = express();
@@ -21,8 +21,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
-app.use(cors);
 app.use(cookieParser());
+app.use(cors);
 app.use(requestLogger);
 app.get('/crash-test', () => {
   setTimeout(() => {
