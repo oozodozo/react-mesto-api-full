@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
-const cors = require('cors');
+const cors = require('./middlewares/cors');
 const usersRoutes = require('./routes/users');
 const cardsRoutes = require('./routes/cards');
 const NotFound = require('./errors/NotFoundError');
@@ -21,12 +21,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(requestLogger);
-app.use(
-  cors({
-    origin: "https://dozo.nomoredomains.xyz",
-    credentials: true,
-  })
-);
+app.use(cors);
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадет');
