@@ -33,6 +33,9 @@ app.post('/signin', validatorLogin, login);
 app.post('/signup', validatorUser, createUser);
 app.use('/users', auth, usersRoutes);
 app.use('/cards', auth, cardsRoutes);
+app.get('/signout', (req, res) => {
+  res.clearCookie('jwt').send({ message: 'Выход' });
+});
 
 app.use(() => {
   throw new NotFound('Запрашиваемая страница не найдена');
