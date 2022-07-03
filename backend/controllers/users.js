@@ -95,11 +95,7 @@ const login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'secret-key',
         { expiresIn: '7d' },
       );
-      res.cookie('jwt', token, {
-        maxAge: 3600000 * 24 * 7,
-        httpOnly: true,
-      })
-        .send({ token });
+      return res.send({ token });
     })
     .catch(() => {
       next(new AuthError('Ошибка авторизации'));
@@ -115,10 +111,6 @@ const getCurrentUser = (req, res, next) => {
     .catch(next);
 };
 
-const logout = (reg, res) => {
-  res.clearCookie('jwt').send({ message: 'Выход' });
-};
-
 module.exports = {
   getUsers,
   getUserById,
@@ -127,5 +119,4 @@ module.exports = {
   updateUserAvatar,
   login,
   getCurrentUser,
-  logout,
 };
