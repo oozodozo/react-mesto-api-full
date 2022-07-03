@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
-const helmet = require('helmet');
+//const helmet = require('helmet');
 const usersRoutes = require('./routes/users');
 const cardsRoutes = require('./routes/cards');
 const NotFound = require('./errors/NotFoundError');
@@ -19,7 +19,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(helmet());
+//app.use(helmet());
 app.use(cors);
 app.use(requestLogger);
 app.get('/crash-test', () => {
