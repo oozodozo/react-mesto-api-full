@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
+const cookieParser = require('cookie-parser');
 const cors = require('./middlewares/cors');
 const usersRoutes = require('./routes/users');
 const cardsRoutes = require('./routes/cards');
@@ -20,6 +21,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
+app.use(cookieParser());
 app.use(requestLogger);
 app.use(cors);
 app.get('/crash-test', () => {
