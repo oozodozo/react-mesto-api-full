@@ -6,7 +6,7 @@ const {
 
 usersRouter.get('/', getUsers);
 usersRouter.get('/me', validatorUserId, getCurrentUser);
-usersRouter.get('/:userId', validatorUserId, getUserById);
+usersRouter.get('/:_id', validatorUserId, getUserById);
 usersRouter.patch('/me', validatorAboutUser, updateUserInfo);
 usersRouter.patch('/me/avatar', validatorAvatar, updateUserAvatar);
 
