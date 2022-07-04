@@ -36,7 +36,11 @@ const createUser = (req, res, next) => {
     }))
     .then((user) => res.status(201).send({
       data: {
-        name: user.name, about: user.about, avatar: user.avatar, email: user.email,
+        name: user.name,
+        about: user.about,
+        avatar: user.avatar,
+        email: user.email,
+        _id: user._id,
       },
     }))
     .catch((err) => {
@@ -103,7 +107,8 @@ const login = (req, res, next) => {
 };
 
 const getCurrentUser = (req, res, next) => {
-  User.findById(req.user._id)
+  const { _id } = req.user;
+  User.findById(_id)
     .orFail(() => new NotFoundError('Запрашиваемый пользователь не найден'))
     .then((user) => {
       res.status(200).send({ data: user });
