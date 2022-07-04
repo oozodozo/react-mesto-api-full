@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
-const cookieParser = require('cookie-parser');
 const cors = require('./middlewares/cors');
 const usersRoutes = require('./routes/users');
 const cardsRoutes = require('./routes/cards');
@@ -21,7 +20,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
-app.use(cookieParser());
 app.use(requestLogger);
 app.use(cors);
 app.get('/crash-test', () => {
@@ -31,11 +29,11 @@ app.get('/crash-test', () => {
 });
 app.post('/signin', validatorLogin, login);
 app.post('/signup', validatorUser, createUser);
-app.use('/users', auth, usersRoutes);
-app.use('/cards', auth, cardsRoutes);
 app.get('/signout', (req, res) => {
   res.clearCookie('jwt').send({ message: 'Выход' });
 });
+app.use('/users', auth, usersRoutes);
+app.use('/cards', auth, cardsRoutes);
 
 app.use(() => {
   throw new NotFound('Запрашиваемая страница не найдена');
