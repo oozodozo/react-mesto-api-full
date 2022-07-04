@@ -47,7 +47,7 @@ const likeCard = (req, res, next) => {
       if (!cardData) {
         throw new NotFoundError('Запрашиваемая карточка не найдена');
       }
-      res.send({ cardData });
+      res.send(cardData);
     })
     .catch(next);
 };
@@ -58,7 +58,7 @@ const dislikeCard = (req, res, next) => {
       if (!cardData) {
         throw new NotFoundError('Запрашиваемая карточка не найдена');
       }
-      res.send({ cardData });
+      res.send(cardData);
     })
     .catch(next);
 };
