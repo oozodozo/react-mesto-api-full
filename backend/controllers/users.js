@@ -99,7 +99,7 @@ const login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'secret-key',
         { expiresIn: '7d' },
       );
-      res.send({ token });
+      res.send({ token, user });
     })
     .catch(() => {
       next(new AuthError('Ошибка авторизации'));
