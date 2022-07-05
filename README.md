@@ -3,9 +3,9 @@
   
 ___  
   
-###PUBLIC IP: [51.250.74.98](https://dozo.nomoredomains.xyz)  
+### PUBLIC IP: [51.250.74.98](https://dozo.nomoredomains.xyz)  
   
-###FRONTEND: [Mesto App](https://dozo.nomoredomains.xyz)   
+### FRONTEND: [Mesto App](https://dozo.nomoredomains.xyz)   
   
-###SERVER: [api.dozo.nomoreparties.sbs](api.dozo.nomoreparties.sbs) 
+### SERVER: [api.dozo.nomoreparties.sbs](api.dozo.nomoreparties.sbs) 
 
