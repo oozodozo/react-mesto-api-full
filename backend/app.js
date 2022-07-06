@@ -32,7 +32,7 @@ app.post('/signup', validatorUser, createUser);
 app.use('/users', auth, usersRoutes);
 app.use('/cards', auth, cardsRoutes);
 
-app.use(() => {
+app.use(auth, () => {
   throw new NotFound('Запрашиваемая страница не найдена');
 });
 
